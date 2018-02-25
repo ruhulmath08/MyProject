@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Prime Faces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <f:view>
+                        <h:form>
+                            <p:commandButton 
+                                value="Insert Data" 
+                                oncomplete="PF('adddata').show()"
+                                icon="ui-icon-plus"/>
+                            <p:dataTable value="#{userBean.allUsers()}" var="users" paginator="true" 
+                                         paginatorPosition="bottom" rows="6">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{users.id}"/>
+                                </p:column>
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{users.name}"/>
+                                </p:column>
+                                <p:column headerText="Email">
+                                    <h:outputText value="#{users.email}"/>
+                                </p:column>
+                                <p:column headerText="Subject">
+                                    <h:outputText value="#{users.subject}"/>
+                                </p:column>
+                                <p:column headerText="Edit">
+                                    <p:commandButton 
+                                        value="Edit"
+                                        oncomplete="PF('edit').show()"
+                                        actionListener="#{userBean.editUser(users)}"
+                                        ajax="true"
+                                        update=":edituser"
+                                        icon="ui-icon-pencil"/>
+                                </p:column>
+                                <p:column headerText="Delete">
+                                    <p:commandButton 
+                                        value="Delete" 
+                                        action="#{userBean.delete(users)}"
+                                        icon="ui-icon-trash"/>
+                                </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <!--Insert Data-->
+                    <p:dialog widgetVar="adddata" header="Insert Data In Database">
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Name"/>
+                                <p:inputText value="#{userBean.user.name}"/>
+                                <p:outputLabel value="Email"/>
+                                <p:inputText value="#{userBean.user.email}"/>
+                                <p:outputLabel value="Subject"/>
+                                <p:inputText value="#{userBean.user.subject}"/>
+                                <h:inputHidden/>
+                                <p:commandButton value="Add Data" action="#{userBean.addUser()}"/>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                    
+                    <!--Update/Edit-->
+                        <p:dialog 
+                            id="edituser"
+                            widgetVar="edit" 
+                            header="Update Form"
+                            resizable="false"
+                            draggable="false">
+                            <h:form>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Name"/>
+                                <p:inputText value="#{userBean.user.name}"/>
+                                <p:outputLabel value="Email"/>
+                                <p:inputText value="#{userBean.user.email}"/>
+                                <p:outputLabel value="Subject"/>
+                                <p:inputText value="#{userBean.user.subject}"/>
+                                <h:inputHidden/>
+                                <p:commandButton value="Add" action="#{userBean.update(userBean.user)}"/>
+                            </p:panelGrid>
+                        </h:form>
+                        </p:dialog>
+                    
+                </f:view>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</f:view>
+</html>
+
