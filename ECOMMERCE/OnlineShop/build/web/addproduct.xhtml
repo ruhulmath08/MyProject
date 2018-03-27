@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"          
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="author" content="Ecommerce"/>
+        <title>eCommerce Website Template</title>
+
+        <link rel="shortcut icon" href="assets/img/favicon.png"/>
+        <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" type="text/css"/>
+        <link rel="stylesheet" href="assets/fonts/line-icons/line-icons.css" type="text/css"/>
+
+        <h:outputStylesheet name="css/bootstrap.min.css" />
+        <h:outputStylesheet name="css/theme.css" />
+        <h:outputStylesheet name="css/component.css" />
+        <h:outputStylesheet name="css/settings.css" />
+        <h:outputStylesheet name="css/responsive.css" />
+        <h:outputStylesheet name="css/theme.css" />
+        <h:outputStylesheet name="css/colors/blue.css" />
+    </h:head>
+    <h:body>
+
+        <div class="header">
+
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-2">
+                            <div class="language-wrapper">
+                                <a href="#"><i class="icon-phone"></i> Call Us: (123) 456- 789</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-md-8 col-sm-10">
+                            <div class="account link-inline">
+                                <a href="login-form.html"><i class="icon-login"></i><span class="hidden-mobile">Admin login</span></a>
+                            </div>
+                            <div class="search-area">
+                                <form>
+                                    <div class="control-group">
+                                        <input class="search-field" placeholder="Search here..."/>
+                                        <a class="search-button" href="#"><i class="icon-magnifier"></i></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="navbar navbar-default affix" data-spy="affix" data-offset-top="50">
+                <div class="container">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="index.xhtml">
+                                <h:graphicImage name="logo.png" library="images"/>
+                            </a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="index.xhtml">Home</a>
+                                </li>
+                                <li class="drop">
+                                    <a class="active" href="allproduct.xhtml">Products <span class="caret"></span></a>
+                                    <div class="dropdown mega-menu megamenu2">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                <ul class="menulinks">
+                                                    <li class="maga-menu-title">
+                                                        <a href="#">Computer</a>
+                                                    </li>
+                                                    <li><a href="category.html">Laptop</a></li>
+                                                    <li><a href="product-details.html">Pc</a></li>
+                                                    <li><a href="shopping-cart.html">Console</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <ul class="menulinks">
+                                                    <li class="maga-menu-title">
+                                                        <a href="#">Mobile</a>
+                                                    </li>
+                                                    <li><a href="submission.html">Smart phone</a></li>
+                                                    <li><a href="single-shop.html">VR - Virtual Reality</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="about.xhtml">About</a></li>
+                                <li><a href="contact.xhtml">Contact</a></li>
+                                <li>
+
+                                    <div class="shop-cart">
+                                        <ul>
+                                            <li>
+                                                <a href="cart.xhtml" class="cart-icon cart-btn">
+                                                    <i class="icon-basket"></i>
+                                                    <span class="cart-label">
+                                                        <h:form id="cart">
+                                                            <h:outputText value="#{shoppingCart.cartsize}" id="cart" />
+                                                        </h:form>
+                                                    </span>
+                                                </a>
+
+                                                <h:form id="cartdetails">
+
+                                                    <div class="cart-box">
+                                                        <div class="popup-container">
+                                                            <c:forEach var="cart" items="#{shoppingCart.cart}">
+                                                                <div class="cart-entry">
+                                                                    <a href="#" class="image">
+                                                                        <h:graphicImage name="#{cart.p.proUri}" library="images" width="150" height="150"/>
+                                                                    </a>
+                                                                    <div class="content">
+                                                                        <a href="#" class="title">#{cart.p.proName}</a>
+                                                                        <p class="quantity">Quantity: #{cart.quantity}</p>
+                                                                        <span class="price">#{cart.p.proPrice}</span>
+                                                                    </div>
+                                                                    <div class="button-x"> 
+                                                                        <h:commandButton value="Remove" action="#{shoppingCart.removeCart(cart)}" styleClass="btn-remove"/>
+                                                                    </div>
+                                                                </div>
+                                                            </c:forEach>
+                                                            <div class="summary">
+                                                                <div class="subtotal">Sub Total</div>
+                                                                <div class="price-s">#{shoppingCart.total}</div>
+                                                            </div>
+                                                            <div class="cart-buttons">
+                                                                <a href="cart.xhtml" class="btn btn-border-2">View Cart</a>
+                                                                <a href="#" class="btn btn-common">Checkout</a>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </h:form>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Add Product</h1>
+                <hr class="lines"/>
+                <div class="row">
+                    <h:form enctype="multipart/form-data">
+                        <p:messages id="msg" closable="true" showDetail="true"></p:messages>
+                        <p:panelGrid columns="2" styleClass="table-plain">
+                            <h:outputLabel value="Select Cattegory Name"></h:outputLabel>
+                            <p:selectOneMenu value="#{productMB.catnamme}">
+                                <f:selectItem itemLabel="Select Category Name" itemValue=""/>
+                                <f:selectItems value="#{subCategoryMB.categoryName}"/>
+                                <p:ajax update="scat" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Select Sub Cattegory Name"></h:outputLabel>
+                            <p:selectOneMenu value="#{productMB.subCatName}" id="scat">
+                                <f:selectItem itemLabel="Select Sub Category Name" itemValue="" />
+                                <f:selectItems value="#{productMB.subCategoryName}" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Product Name"></h:outputLabel>
+                            <p:inputText value="#{productMB.product.proName}"></p:inputText>
+
+                            <h:outputLabel value="Product Quantity"></h:outputLabel>
+                            <p:inputText value="#{productMB.product.proQty}"></p:inputText>
+
+                            <h:outputLabel value="Product Price"></h:outputLabel>
+                            <p:inputText value="#{productMB.product.proPrice}"></p:inputText>
+
+                            <h:outputLabel value="Select Image"></h:outputLabel>
+                            <p:fileUpload value="#{productMB.file}" mode="simple"/>
+                            <h:outputLabel value="Upload Image"></h:outputLabel>
+                            <h:graphicImage name="#{productMB.product.proUri}" library="images" />
+
+                            <h:outputLabel value="Product Description"></h:outputLabel>
+                            <p:inputText value="#{productMB.product.proDesc}"></p:inputText>
+
+                            <p:commandButton action="#{productMB.addProduct()}" value="Save" update="msg" ajax="false"></p:commandButton>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </section>
+
+        <div id="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p>All copyrights reserved © 2018 - Designed &amp; Developed by Ruhul and Atique</p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="payment pull-right">
+                            <h:graphicImage name="payment.png" library="images"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <a href="#" class="back-to-top">
+            <i class="icon-arrow-up"></i>
+        </a>
+
+        <div class="md-overlay"></div>
+
+        <div id="loader">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+
+        <h:outputScript name="js/bootstrap.min.js" />
+        <h:outputScript name="js/main.js" />
+    </h:body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2018 1:50:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class catalog="shop_online" name="com.shop.entity.Category" optimistic-lock="version" table="category">
+        <id name="catId" type="java.lang.Integer">
+            <column name="cat_id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="catName" type="string">
+            <column length="45" name="cat_name" not-null="true"/>
+        </property>
+        <property name="catDesc" type="string">
+            <column length="200" name="cat_desc" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="subCategories" table="sub_category">
+            <key>
+                <column name="cat_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.shop.entity.SubCategory"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2018 1:50:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="shop_online" name="com.shop.entity.DeliveryCost" optimistic-lock="version" table="delivery_cost">
+    <id name="deliveryId" type="java.lang.Integer">
+      <column name="delivery_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="zoneName" type="string">
+      <column length="45" name="zone_name" not-null="true"/>
+    </property>
+    <property name="delivaryCost" type="double">
+      <column name="delivary_cost" not-null="true" precision="22" scale="0"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="proOrders" table="pro_order">
+      <key>
+        <column name="delivery_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.shop.entity.ProOrder"/>
+    </set>
+  </class>
+</hibernate-mapping>

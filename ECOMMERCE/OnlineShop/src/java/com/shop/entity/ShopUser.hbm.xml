@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2018 1:50:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="shop_online" name="com.shop.entity.ShopUser" optimistic-lock="version" table="shop_user">
+    <id name="userId" type="java.lang.Integer">
+      <column name="user_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.shop.entity.UserRole" fetch="select" name="userRole">
+      <column name="role_id" not-null="true"/>
+    </many-to-one>
+    <property name="userName" type="string">
+      <column length="45" name="user_name" not-null="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="45" name="password" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="45" name="email" not-null="true"/>
+    </property>
+    <property name="regDate" type="date">
+      <column length="10" name="reg_date" not-null="true"/>
+    </property>
+    <property name="contactNo" type="string">
+      <column length="11" name="contact_no" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="proOrders" table="pro_order">
+      <key>
+        <column name="user_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.shop.entity.ProOrder"/>
+    </set>
+  </class>
+</hibernate-mapping>

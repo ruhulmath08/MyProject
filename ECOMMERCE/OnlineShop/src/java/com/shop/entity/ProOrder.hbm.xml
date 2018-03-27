@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2018 1:50:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="shop_online" name="com.shop.entity.ProOrder" optimistic-lock="version" table="pro_order">
+    <id name="orderId" type="java.lang.Integer">
+      <column name="order_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.shop.entity.DeliveryCost" fetch="select" name="deliveryCost">
+      <column name="delivery_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.shop.entity.ShopUser" fetch="select" name="shopUser">
+      <column name="user_id" not-null="true"/>
+    </many-to-one>
+    <property name="proId" type="int">
+      <column name="pro_id" not-null="true"/>
+    </property>
+    <property name="orderDate" type="date">
+      <column length="10" name="order_date" not-null="true"/>
+    </property>
+    <property name="orderQty" type="int">
+      <column name="order_qty" not-null="true"/>
+    </property>
+    <property name="totalPrice" type="double">
+      <column name="total_price" not-null="true" precision="22" scale="0"/>
+    </property>
+    <property name="orderStatus" type="string">
+      <column length="45" name="order_status" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="proOrderDetailses" table="pro_order_details">
+      <key>
+        <column name="order_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.shop.entity.ProOrderDetails"/>
+    </set>
+  </class>
+</hibernate-mapping>

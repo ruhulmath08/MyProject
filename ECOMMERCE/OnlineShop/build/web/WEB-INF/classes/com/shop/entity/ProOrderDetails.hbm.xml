@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 1, 2018 1:50:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="shop_online" name="com.shop.entity.ProOrderDetails" optimistic-lock="version" table="pro_order_details">
+    <id name="orderDetails" type="java.lang.Integer">
+      <column name="order_details"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.shop.entity.ProOrder" fetch="select" name="proOrder">
+      <column name="order_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.shop.entity.Product" fetch="select" name="product">
+      <column name="pro_id" not-null="true"/>
+    </many-to-one>
+    <property name="proQty" type="int">
+      <column name="pro_qty" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>
